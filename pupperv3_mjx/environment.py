@@ -75,12 +75,12 @@ class PupperV3Env(PipelineEnv):
                 x_min=-2.0, x_max=2.0, y_min=-2.0, y_max=2.0, z_min=0.15, z_max=0.20
             )
         ),
-        foot_site_names: List[str] = [
-            "leg_front_r_3_foot_site",
-            "leg_front_l_3_foot_site",
-            "leg_back_r_3_foot_site",
-            "leg_back_l_3_foot_site",
-        ],
+        # foot_site_names: List[str] = [
+        #     "leg_front_r_3_foot_site",
+        #     "leg_front_l_3_foot_site",
+        #     "leg_back_r_3_foot_site",
+        #     "leg_back_l_3_foot_site",
+        # ],
         torso_name: str = "base_link",
         upper_leg_body_names: List[str] = [
             "leg_front_r_2",
@@ -89,10 +89,10 @@ class PupperV3Env(PipelineEnv):
             "leg_back_l_2",
         ],
         lower_leg_body_names: List[str] = [
-            "leg_front_r_3",
-            "leg_front_l_3",
-            "leg_back_r_3",
-            "leg_back_l_3",
+            "wheel_front_r",
+            "wheel_front_l",
+            "wheel_back_r",
+            "wheel_back_l",
         ],
         resample_velocity_step: int = 500,
         linear_velocity_x_range: Tuple[float, float] = (-0.75, 0.75),
@@ -223,8 +223,8 @@ class PupperV3Env(PipelineEnv):
         feet_site_id = [
             mujoco.mj_name2id(sys.mj_model, mujoco.mjtObj.mjOBJ_SITE.value, f) for f in feet_site
         ]
-        assert not any(id_ == -1 for id_ in feet_site_id), "Site not found."
-        self._feet_site_id = np.array(feet_site_id)
+        #assert not any(id_ == -1 for id_ in feet_site_id), "Site not found."
+        #self._feet_site_id = np.array(feet_site_id)
 
         self._lower_leg_body_id = body_names_to_body_ids(sys.mj_model, lower_leg_body_names)
         self._upper_leg_geom_ids = body_names_to_geom_ids(sys.mj_model, upper_leg_body_names)
